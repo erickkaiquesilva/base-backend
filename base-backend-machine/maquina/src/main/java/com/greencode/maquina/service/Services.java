@@ -15,7 +15,7 @@ public class Services {
 
     public Services() {
         restTemplate = new RestTemplate();
-        url = "http://3.211.16.250";
+        url = "http://greencode-backend-lb-170707148.us-east-1.elb.amazonaws.com";
     }
 
     public Usuario login(Usuario user) {
