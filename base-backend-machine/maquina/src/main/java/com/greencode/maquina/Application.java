@@ -1,9 +1,11 @@
 package com.greencode.maquina;
 
+import com.google.gson.Gson;
 import com.greencode.maquina.gui.JPassWordFieldHint;
 import com.greencode.maquina.gui.JTextFieldHint;
 import com.greencode.maquina.gui.Reciclando;
 import com.greencode.maquina.model.Usuario;
+import com.greencode.maquina.qrcode.CapturaQrCode;
 import com.greencode.maquina.service.Services;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -25,6 +27,7 @@ public class Application extends javax.swing.JFrame {
     /**
      * Creates new form Application
      */
+	
     static Application ex;
     static Reciclando app = new Reciclando();
     static Usuario usuario;
@@ -199,6 +202,7 @@ public class Application extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 480));
 
+       
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -207,17 +211,42 @@ public class Application extends javax.swing.JFrame {
     }//GEN-LAST:event_userNameActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        if (logou()) {
-        	app.setDados(usuario);
-            app.setBemVindo(usuario.getNome());
-            setVisible(false);
-            app.recebeAnterior(ex,usuario); 
-            app.setLocationRelativeTo(null);
-            app.recebeAnterior(ex, usuario);
-            app.setVisible(true);
-        } else {
-            message.setText("Usuário ou Senha Incorreto");
-        }
+        
+    	Gson gson = new Gson();
+    	
+    	final Thread thread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try (CapturaQrCode qr = new CapturaQrCode()) {
+					usuario = gson.fromJson(qr.getResult(), Usuario.class);
+					
+					usuario = services.login(usuario);
+					
+					if (usuario != null) {
+			        	app.setDados(usuario);
+			            app.setBemVindo(usuario.getNome());
+			            setVisible(false);
+			            app.recebeAnterior(ex,usuario); 
+			            app.setLocationRelativeTo(null);
+			            app.recebeAnterior(ex, usuario);
+			            app.setVisible(true);
+			        } else {
+			            message.setText("Usuário ou Senha Incorreto");
+			        }
+				} catch (InterruptedException ex) {
+					ex.printStackTrace();
+				}
+			};
+		});
+		thread.setDaemon(true);
+		thread.start();
+    	
+		
+    	
+    	
+    	
+    	
     }//GEN-LAST:event_jLabel6MouseClicked
     
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -259,17 +288,8 @@ public class Application extends javax.swing.JFrame {
         });
     }
 
-    public boolean logou() {
-
-        Usuario user = new Usuario(passField.getText(), userName.getText());
-        usuario = services.login(user);
-
-        if (usuario != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+   
+        
 
     public void resetUsername() {
         userName.setText("");

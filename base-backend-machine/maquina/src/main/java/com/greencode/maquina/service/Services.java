@@ -16,6 +16,7 @@ public class Services {
     public Services() {
         restTemplate = new RestTemplate();
         url = "http://greencode-backend-lb-170707148.us-east-1.elb.amazonaws.com";
+       
     }
 
     public Usuario login(Usuario user) {
@@ -23,7 +24,6 @@ public class Services {
         ResponseEntity<Usuario> resposta = null ;
         try{
             resposta = restTemplate.postForEntity(urlLogin, user, Usuario.class);
-            
         }catch(Exception e){
             return null;
         }

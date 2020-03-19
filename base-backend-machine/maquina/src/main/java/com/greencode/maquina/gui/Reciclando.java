@@ -208,7 +208,7 @@ public class Reciclando extends javax.swing.JFrame {
         int novoPonto = user.getPontos() + (valor * reciclavel.getPontos());
         int novoQtdItens = user.getTotalItens() + valor;
         services.atualizarPontos(user, novoPonto);
-    	services.atualizarItens(user, novoQtdItens);
+        services.atualizarItens(user, novoQtdItens);
         
     	bool = false;
         ex.recebeAnterior(this);

@@ -37,7 +37,7 @@ public class LoginController {
 			lista.adiciona(usuario.getEmail());
 			if(lista.getTamanho() == 1) {
 			System.out.println(lista);
-				new CreateFile().gravar(lista);
+				//new CreateFile().gravar(lista);
 				lista.limpa();
 			}
 			return ResponseEntity.ok(usuarioLogado);			
