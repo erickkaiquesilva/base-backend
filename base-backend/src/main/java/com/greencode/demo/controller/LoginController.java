@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,24 @@ public class LoginController {
 	
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
+	
+	@GetMapping("/login/{email}/{senha}")
+	public ResponseEntity<Usuario> validarLogin(@PathVariable String email, @PathVariable String senha) {
+		Usuario usuarioLogado = tdUsuario.logar(email, senha);
+		
+		if(usuarioLogado != null) {
+			lista.adiciona(email);
+			if(lista.getTamanho() == 1) {
+			System.out.println(lista);
+				//new CreateFile().gravar(lista);
+				lista.limpa();
+			}
+			return ResponseEntity.ok(usuarioLogado);			
+		}
+	
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	}
+	
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
