@@ -62,7 +62,7 @@ public class LoginController {
 			return ResponseEntity.ok(usuarioLogado);			
 		}
 	
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		return ResponseEntity.ok(null);
 	}
 	
 	
