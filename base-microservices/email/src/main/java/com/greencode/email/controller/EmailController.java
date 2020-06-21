@@ -55,4 +55,34 @@ public class EmailController {
 		
 		return ResponseEntity.ok("Email não cadastrado");
 	}
+	
+	
+	@PostMapping("/email/cupon")
+	public ResponseEntity<String> enviarNovoCupon(@RequestBody String email ){
+		
+		Random gerador = new Random();
+		Usuario usuario = tds.buscarEmail(email);
+		GerarSenha gs = new GerarSenha();
+		String fatorial = gs.fatorial(gerador.nextInt(20) + 13)+"";
+		for(int i = 0; i < 10; i++) {
+			gs.getPilha().add(fatorial.charAt(i));
+		}
+		
+		
+		if(usuario != null) {
+			String cupon = gs.exibeSenha(gerador.nextBoolean());
+			
+			SimpleMailMessage msg = new SimpleMailMessage();
+	        msg.setTo(email);
+	
+	        msg.setSubject("Cupon Adquirido");
+	        msg.setText("Cupon: " + cupon.toUpperCase());
+	
+	        javaMailSender.send(msg);
+			
+			return ResponseEntity.ok("Cupon Enviado, Verifique seu Email");
+		}
+		
+		return ResponseEntity.ok("Email não cadastrado");
+	}
 }

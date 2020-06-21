@@ -27,4 +27,12 @@ public class EmailController {
 		return ResponseEntity.ok(resposta);
 	}
 	
+	@PostMapping("/email/cupon")
+	public ResponseEntity<String> enviarNovoCupon(@RequestBody String email){
+		
+		String resposta = service.enviarCupon(email);
+		
+		return ResponseEntity.ok(resposta);
+	}
+	
 }

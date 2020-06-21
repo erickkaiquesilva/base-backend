@@ -20,4 +20,10 @@ public class EmailService {
 		ResponseEntity<String> resposta = restTemplate.postForEntity(urlCadastro, email, String.class);
 		return resposta.getBody();
 	}
+	
+	public String enviarCupon(String email) {
+		String urlCadastro = url + "/cupon";
+		ResponseEntity<String> resposta = restTemplate.postForEntity(urlCadastro, email, String.class);
+		return resposta.getBody();
+	}
 }
