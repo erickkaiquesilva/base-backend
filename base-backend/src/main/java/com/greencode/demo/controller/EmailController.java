@@ -32,6 +32,8 @@ public class EmailController {
 		
 		String resposta = service.enviarCupon(email);
 		
+		System.out.println(resposta);
+		
 		return ResponseEntity.ok(resposta);
 	}
 	

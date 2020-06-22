@@ -128,6 +128,7 @@ public class EmailController {
 
 		//});
 
+		System.out.println("Chegou aqui antes de gerar o cupon");
 		Random gerador = new Random();
 		Usuario usuario = tds.buscarEmail(email);
 		GerarSenha gs = new GerarSenha();
@@ -135,9 +136,13 @@ public class EmailController {
 		for (int i = 0; i < 9; i++) {
 			gs.getPilha().add(fatorial.charAt(i));
 		}
+		
+		System.out.println("depois de gerar o cupon");
 
 		if (usuario != null) {
 
+			System.out.println("entrou no if se tem usuario");
+			
 			String cupom = gs.exibeSenha(gerador.nextBoolean());
 
 			try {
