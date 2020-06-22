@@ -62,7 +62,7 @@ public class EmailController {
 		Usuario usuario = tds.buscarEmail(email);
 		GerarSenha gs = new GerarSenha();
 		String fatorial = gs.fatorial(gerador.nextInt(20) + 13) + "";
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 9; i++) {
 			gs.getPilha().add(fatorial.charAt(i));
 		}
 
@@ -132,7 +132,7 @@ public class EmailController {
 		Usuario usuario = tds.buscarEmail(email);
 		GerarSenha gs = new GerarSenha();
 		String fatorial = gs.fatorial(gerador.nextInt(20) + 13) + "";
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 9; i++) {
 			gs.getPilha().add(fatorial.charAt(i));
 		}
 
