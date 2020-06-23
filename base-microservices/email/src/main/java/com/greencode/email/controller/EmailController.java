@@ -77,28 +77,14 @@ public class EmailController {
 		        msg.setTo(email);
 		
 		        msg.setSubject("Sua Nova Senha");
-		        msg.setText("Nova Senha: " + senha);
+		        msg.setText("Parabéns você trocou sua senha com sucesso\n"
+						+ "Utilizze essa senha para fazer login no App ou no site da Green Code"
+						+ "A Green Code agradece sua ajuda :)\n\n"
+						+ "Nova senha: " + senha);
 		
 		        javaMailSender.send(msg);
-				
-				// Create a default MimeMessage object.
-				//MimeMessage message = new MimeMessage(session);
-
-				// Set From: header field of the header.
-				//message.setFrom(new InternetAddress(from));
-
-				// Set To: header field of the header.
-				//message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-				// Set Subject: header field
-				//message.setSubject("Sua nova senha de acesso da Green Code");
-
-				// Now set the actual message
-				//message.setText(senha);
 
 				System.out.println("enviando...");
-				// Send message
-				//Transport.send(message);
 				System.out.println("Mensagem enviada com exito....");
 			} catch (Exception mex) {
 				mex.printStackTrace();
@@ -114,20 +100,6 @@ public class EmailController {
 	@SuppressWarnings("unused")
 	@PostMapping("/email/cupon")
 	public ResponseEntity<String> enviarNovoCupon(@RequestBody String email) {
-
-		//String to = email;
-		//String from = "dont.reply.greencode@gmail.com";
-		//Properties properties = System.getProperties();
-
-		//Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
-			//protected PasswordAuthentication getPasswordAuthentication() {
-
-				//return new PasswordAuthentication(from, "jyzenfqinviebrmn");
-
-			//}
-
-		//});
 
 		System.out.println("Chegou aqui antes de gerar o cupon");
 		Random gerador = new Random();
@@ -156,31 +128,15 @@ public class EmailController {
 					msg.setTo(email);
 				
 					msg.setSubject("Cupon Adquirido");
-					msg.setText("Cupon: " + cupom.toUpperCase());
+					msg.setText("Parabéns você trocou seus pontos com sucesso\n"
+							+ "Agora pegue seu cupom e garanta seu desconto na loja parceira\n\n"
+							+ "A Green Code agradece sua ajuda :)\n\n"
+							+ "Cupon: " + "GREEN" + cupom.toUpperCase());
 				
 					System.out.println("enviando...");
 					
 					javaMailSender.send(msg);
 				
-				
-				// Create a default MimeMessage object.
-				//MimeMessage message = new MimeMessage(session);
-
-				// Set From: header field of the header.
-				//message.setFrom(new InternetAddress(from));
-
-				// Set To: header field of the header.
-				//message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-				// Set Subject: header field
-				//message.setSubject("Sua nova senha de acesso da Green Code");
-
-				// Now set the actual message
-				//message.setText(cupom);
-
-				
-				// Send message
-				//Transport.send(message);
 				System.out.println("Mensagem enviada com exito....");
 			} catch (Exception mex) {
 				mex.printStackTrace();
@@ -190,21 +146,5 @@ public class EmailController {
 
 		System.out.println("email não cadastrado");
 		return ResponseEntity.ok("Email não cadastrado");
-
-//		if (usuario != null) {
-//			String cupon = gs.exibeSenha(gerador.nextBoolean());
-//
-//			SimpleMailMessage msg = new SimpleMailMessage();
-//			msg.setTo(email);
-//
-//			msg.setSubject("Cupon Adquirido");
-//			msg.setText("Cupon: " + cupon.toUpperCase());
-//
-//			javaMailSender.send(msg);
-//
-//			return ResponseEntity.ok("Cupon Enviado, Verifique seu Email");
-//		}
-//
-//		return ResponseEntity.ok("Email não cadastrado");
 	}
 }
