@@ -131,6 +131,7 @@ public class EmailController {
 
 		System.out.println("Chegou aqui antes de gerar o cupon");
 		Random gerador = new Random();
+	
 		Usuario usuario = tds.buscarEmail(email);
 		GerarSenha gs = new GerarSenha();
 		String fatorial = gs.fatorial(gerador.nextInt(20) + 13) + "";
