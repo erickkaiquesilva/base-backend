@@ -111,6 +111,7 @@ public class EmailController {
 
 //			
 
+	@SuppressWarnings("unused")
 	@PostMapping("/email/cupon")
 	public ResponseEntity<String> enviarNovoCupon(@RequestBody String email) {
 
@@ -136,8 +137,10 @@ public class EmailController {
 		for (int i = 0; i < 9; i++) {
 			gs.getPilha().add(fatorial.charAt(i));
 		}
-		
+				
 		System.out.println("depois de gerar o cupon");
+		System.out.println(email);
+
 
 		if (usuario != null) {
 
@@ -183,6 +186,7 @@ public class EmailController {
 			return ResponseEntity.ok("Cupon Enviado, Verifique seu Email");
 		}
 
+		
 		return ResponseEntity.ok("Email não cadastrado");
 
 //		if (usuario != null) {
