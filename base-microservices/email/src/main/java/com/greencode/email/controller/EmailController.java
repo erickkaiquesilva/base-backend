@@ -139,6 +139,7 @@ public class EmailController {
 			gs.getPilha().add(fatorial.charAt(i));
 		}
 				
+		System.out.println(usuario.toString());
 		System.out.println("depois de gerar o cupon");
 		System.out.println(email);
 
@@ -187,7 +188,7 @@ public class EmailController {
 			return ResponseEntity.ok("Cupon Enviado, Verifique seu Email");
 		}
 
-		
+		System.out.println("email não cadastrado");
 		return ResponseEntity.ok("Email não cadastrado");
 
 //		if (usuario != null) {
