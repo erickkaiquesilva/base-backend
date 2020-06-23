@@ -139,7 +139,7 @@ public class EmailController {
 			gs.getPilha().add(fatorial.charAt(i));
 		}
 				
-		System.out.println(usuario.toString());
+		
 		System.out.println("depois de gerar o cupon");
 		System.out.println(email);
 
