@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.greencode.demo.model.Usuario;
 import com.greencode.demo.service.EmailService;
 
 
@@ -29,13 +30,15 @@ public class EmailController {
 	}
 	
 	@PostMapping("/email/cupon")
-	public ResponseEntity<String> enviarNovoCupon(@RequestBody String email){
+	public ResponseEntity<String> enviarNovoCupon(@RequestBody Usuario usuario){
 		
-		String resposta = service.enviarCupon(email);
+		System.out.println(usuario.getEmail());
+		
+		String resposta = service.enviarCupon(usuario.getEmail());
 		
 		System.out.println(resposta);
 		
-		return ResponseEntity.ok(resposta);
+		return ResponseEntity.ok().build();
 	}
 	
 }
